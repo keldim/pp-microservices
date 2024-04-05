@@ -1,16 +1,28 @@
 package com.chrisyoo.guest;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.core.KafkaTemplate;
 
-@SpringBootApplication(
-        scanBasePackages = {
-                "com.chrisyoo.guest",
-                "com.chrisyoo.kafka"
-        }
-)
+@SpringBootApplication
 public class GuestApplication {
     public static void main(String[] args) {
         SpringApplication.run(GuestApplication.class, args);
     }
+
+    @Bean
+    CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate) {
+        return args -> {
+            kafkaTemplate.send("ski", "hello kafka :)");
+        };
+    }
+
+//    (
+//    scanBasePackages = {
+//        "com.chrisyoo.guest",
+//                "com.chrisyoo.kafka"
+//    }
+//)
 }
