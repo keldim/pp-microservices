@@ -17,6 +17,9 @@
     <module>
       kafka
     </module>
+    <module>
+      notification
+    </module>
   </modules>
 
   <name>backend</name>
