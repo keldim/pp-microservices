@@ -3,6 +3,8 @@ package com.chrisyoo.guest;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class GuestService {
     GuestRepository guestRepository;
@@ -16,7 +18,9 @@ public class GuestService {
         guestRepository.save(guest);
     }
 
-    public void getSkiResorts() {
+    public String getSkiResorts() {
+        UUID uuid = UUID.randomUUID();
         kafkaTemplate.send("ski", "hello kafka :)");
+        return uuid.toString();
     }
 }
