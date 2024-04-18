@@ -17,8 +17,8 @@ public class GuestController {
     }
 
     @GetMapping
-    public void getSkiResorts() {
+    public String getSkiResorts() {
         log.info("get a list of ski resorts");
-        guestService.getSkiResorts();
+        return guestService.getSkiResorts();
     }
 }
