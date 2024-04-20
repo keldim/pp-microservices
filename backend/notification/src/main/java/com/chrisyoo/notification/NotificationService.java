@@ -1,6 +1,7 @@
 package com.chrisyoo.notification;
 
 public class NotificationService {
+    NotificationRepository notificationRepository;
     public void sendSkiResortList(Object[] skiResortList) {
         // send it to ski api
         // but with the sender as guest
