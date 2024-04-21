@@ -25,4 +25,8 @@ public class Notification {
     private String uuid;
     private String message;
 //    private LocalDateTime sentAt;
+
+    // how to store data from third party api into database?
+    // parse first?
+    // do I have to create variables for all the nested json objects?
 }
