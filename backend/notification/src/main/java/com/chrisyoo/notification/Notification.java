@@ -29,4 +29,6 @@ public class Notification {
     // how to store data from third party api into database?
     // parse first?
     // do I have to create variables for all the nested json objects?
+
+    // trying to save data without mapping all the nested json objects
 }
