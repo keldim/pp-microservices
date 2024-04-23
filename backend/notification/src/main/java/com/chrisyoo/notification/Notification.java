@@ -1,6 +1,7 @@
 package com.chrisyoo.notification;
 
 import lombok.*;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -23,7 +24,8 @@ public class Notification {
     )
     private Integer notificationId;
     private String uuid;
-    private String message;
+    private JSONObject skiApiData;
+//    private String message;
 //    private LocalDateTime sentAt;
 
     // how to store data from third party api into database?

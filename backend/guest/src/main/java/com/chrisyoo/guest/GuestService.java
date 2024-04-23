@@ -20,7 +20,7 @@ public class GuestService {
 
     public String getSkiResorts() {
         UUID uuid = UUID.randomUUID();
-        kafkaTemplate.send("ski", "get a list of ski resorts");
+        kafkaTemplate.send("ski", uuid.toString());
         return uuid.toString();
     }
 }
