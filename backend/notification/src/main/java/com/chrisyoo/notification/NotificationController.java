@@ -1,7 +1,7 @@
 package com.chrisyoo.notification;
 
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,11 +12,12 @@ import javax.persistence.EntityNotFoundException;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/notifictions")
+@RequestMapping("api/v1/notifications")
 public class NotificationController {
+    @Autowired
     NotificationService notificationService;
     @GetMapping
-    public ResponseEntity<JSONObject> getData(@RequestBody String uuid) {
+    public ResponseEntity<String> getData(@RequestBody String uuid) {
         log.info("get the saved data using uuid");
 
         try {

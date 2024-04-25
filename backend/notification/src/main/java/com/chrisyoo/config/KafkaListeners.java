@@ -3,6 +3,7 @@ package com.chrisyoo.config;
 import com.chrisyoo.notification.NotificationService;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +11,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
 @Component
 public class KafkaListeners {
+    @Autowired
     NotificationService notificationService;
     @KafkaListener(topics = "ski", groupId = "one")
     void listener(String uuid) {
@@ -31,15 +32,10 @@ public class KafkaListeners {
         try {
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             body = response.body();
-            dataInJsonFormat = (JSONObject) parser.parse(body);
-            notificationService.saveSkiResortList(dataInJsonFormat, uuid);
+//            dataInJsonFormat = (JSONObject) parser.parse(body);
+            notificationService.saveSkiResortList(body, uuid);
         } catch(Exception exception) {
             System.out.println(exception);
         }
-
-        //        String url = "";
-//        RestTemplate restTemplate = new RestTemplate();
-//        JSONObject skiResortList = restTemplate.getForObject(url, JSONObject.class);
-//        return Arrays.asList(skiResortList);
     }
 }

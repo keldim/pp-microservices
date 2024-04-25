@@ -1,10 +1,13 @@
 package com.chrisyoo.notification;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
 public class SearchByUuidImpl implements SearchByUuid {
+    @Autowired
     private EntityManager entityManager;
 
     public Notification findByUuid(String uuid) {

@@ -1,7 +1,6 @@
 package com.chrisyoo.notification;
 
 import lombok.*;
-import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -24,7 +23,7 @@ public class Notification {
     )
     private Integer notificationId;
     private String uuid;
-    private JSONObject skiApiData;
+    private String skiApiData;
 //    private String message;
 //    private LocalDateTime sentAt;
 
