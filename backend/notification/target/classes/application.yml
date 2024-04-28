@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.apache.kafka: WARN
+
 server:
   port: 8081
 
@@ -18,8 +22,6 @@ spring:
     show-sql: true
   kafka:
     bootstrap-servers: localhost:9092
-    consumer:
-      group-id: list
 #    consumer:
 #      auto-offset-reset: earliest
 #      enable-auto-commit: false
