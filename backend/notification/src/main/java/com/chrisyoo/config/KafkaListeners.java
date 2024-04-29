@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class KafkaListeners {
 //    @Autowired
 //    NotificationService notificationService;
+
     @KafkaListener(topics = "ski", groupId = "list")
     void listener(String uuid) {
         System.out.println("Listener received: " + uuid);
