@@ -1,9 +1,11 @@
-package com.chrisyoo.config;
+package com.chrisyoo.kafka;
 
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
+@EnableKafka
 public class KafkaListeners {
 //    @Autowired
 //    NotificationService notificationService;
