@@ -1,16 +1,14 @@
 package com.chrisyoo.kafka;
 
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableKafka
 public class KafkaListeners {
 //    @Autowired
 //    NotificationService notificationService;
 
-    @KafkaListener(topics = "ski", groupId = "list")
+    @KafkaListener(topics = "ski", groupId = "test-consumer-group")
     void listener(String uuid) {
         System.out.println("Listener received: " + uuid);
 // String uuid
