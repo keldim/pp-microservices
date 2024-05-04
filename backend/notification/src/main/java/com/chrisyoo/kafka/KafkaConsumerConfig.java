@@ -27,6 +27,7 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         return props;
 //        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+//        taking courses to have a better understanding of kafka
     }
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
