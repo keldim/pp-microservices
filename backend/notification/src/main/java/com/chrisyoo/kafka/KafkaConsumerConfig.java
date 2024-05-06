@@ -28,6 +28,7 @@ public class KafkaConsumerConfig {
         return props;
 //        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
 //        taking courses to have a better understanding of kafka
+//        still taking courses
     }
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
