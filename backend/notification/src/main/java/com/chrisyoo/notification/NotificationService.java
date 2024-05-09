@@ -15,7 +15,6 @@ public class NotificationService {
     }
 
     public Notification getData(String uuid) {
-        Notification data = notificationRepository.findByUuid(uuid);
-        return data;
+        return notificationRepository.findByUuid(uuid).orElseThrow();
     }
 }

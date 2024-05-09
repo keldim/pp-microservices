@@ -2,5 +2,9 @@ package com.chrisyoo.notification;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NotificationRepository extends JpaRepository<Notification, Integer>, SearchByUuid {
+import java.util.Optional;
+
+public interface NotificationRepository extends JpaRepository<Notification, Integer> {
+    Optional<Notification> findByUuid(String uuid);
+//    SearchByUuid
 }
