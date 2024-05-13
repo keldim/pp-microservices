@@ -1,15 +1,17 @@
 package com.chrisyoo.guest;
 
+import com.chrisyoo.kafka.KafkaProducer;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/v1/guests")
 public class GuestController {
-    @Autowired
-    GuestService guestService;
+    private final KafkaProducer kafkaProducer;
+    private final GuestService guestService;
 
     @PostMapping
     public void registerGuest(@RequestBody GuestRegistrationRequest guestRegistrationRequest) {
@@ -20,6 +22,6 @@ public class GuestController {
     @GetMapping
     public String getSkiResorts() {
         log.info("get a list of ski resorts");
-        return guestService.getSkiResorts();
+        return kafkaProducer.sendSkiResortsEvent();
     }
 }
