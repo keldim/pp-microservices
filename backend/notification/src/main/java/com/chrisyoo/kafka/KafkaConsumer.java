@@ -1,15 +1,19 @@
 package com.chrisyoo.kafka;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaListeners {
+@Slf4j
+public class KafkaConsumer {
 //    @Autowired
 //    NotificationService notificationService;
 
-    @KafkaListener(topics = "ski", groupId = "test-consumer-group")
-    void listener(String uuid) {
+    @KafkaListener(topics = {"ski"})
+    void listener(ConsumerRecord<String, String> consumerRecord) {
+        log.info("ConsumerRecord : {}", consumerRecord);
         System.out.println("Listener received: " + uuid);
 // String uuid
 //        HttpRequest request = HttpRequest.newBuilder()
