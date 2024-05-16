@@ -12,7 +12,7 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class KafkaProducer {
+public class SkiEventProducer {
     @Value("${spring.kafka.topic}")
     private String topic;
 

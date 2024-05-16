@@ -14,7 +14,7 @@ public class KafkaConsumer {
     @KafkaListener(topics = {"ski"})
     void listener(ConsumerRecord<String, String> consumerRecord) {
         log.info("ConsumerRecord : {}", consumerRecord);
-        
+
 // String uuid
 //        HttpRequest request = HttpRequest.newBuilder()
 //                .uri(URI.create("https://ski-resorts-and-conditions.p.rapidapi.com/v1/resort"))

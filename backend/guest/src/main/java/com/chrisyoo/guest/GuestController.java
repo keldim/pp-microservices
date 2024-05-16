@@ -1,6 +1,6 @@
 package com.chrisyoo.guest;
 
-import com.chrisyoo.kafka.KafkaProducer;
+import com.chrisyoo.kafka.SkiEventProducer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/guests")
 public class GuestController {
-    private final KafkaProducer kafkaProducer;
+    private final SkiEventProducer skiEventProducer;
     private final GuestService guestService;
 
     @PostMapping
@@ -22,6 +22,6 @@ public class GuestController {
     @GetMapping
     public String getSkiResorts() {
         log.info("get a list of ski resorts");
-        return kafkaProducer.sendSkiResortsEvent();
+        return skiEventProducer.sendSkiResortsEvent();
     }
 }
