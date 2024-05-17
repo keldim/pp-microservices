@@ -1,4 +1,4 @@
-package com.chrisyoo.notification;
+package com.chrisyoo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
