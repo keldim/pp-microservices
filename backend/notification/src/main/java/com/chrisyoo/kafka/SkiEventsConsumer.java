@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class KafkaConsumer {
+public class SkiEventsConsumer {
 //    @Autowired
 //    NotificationService notificationService;
 
     @KafkaListener(topics = {"ski"})
-    void listener(ConsumerRecord<String, String> consumerRecord) {
+    public void onMessage(ConsumerRecord<String, String> consumerRecord) {
         log.info("ConsumerRecord : {}", consumerRecord);
 
 // String uuid
