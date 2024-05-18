@@ -1,6 +1,6 @@
 package com.chrisyoo.guest;
 
-import com.chrisyoo.kafka.SkiEventProducer;
+import com.chrisyoo.kafka.SkiEventsProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/guests")
 public class GuestController {
-    private SkiEventProducer skiEventProducer;
+    private SkiEventsProducer skiEventsProducer;
     private GuestService guestService;
 
     @Autowired
-    public GuestController(SkiEventProducer skiEventProducer, GuestService guestService) {
-        this.skiEventProducer = skiEventProducer;
+    public GuestController(SkiEventsProducer skiEventsProducer, GuestService guestService) {
+        this.skiEventsProducer = skiEventsProducer;
         this.guestService = guestService;
     }
 
@@ -27,6 +27,6 @@ public class GuestController {
     @GetMapping
     public String getSkiResorts() {
         log.info("get a list of ski resorts");
-        return skiEventProducer.sendSkiResortsEvent();
+        return skiEventsProducer.sendSkiResortsEvent();
     }
 }

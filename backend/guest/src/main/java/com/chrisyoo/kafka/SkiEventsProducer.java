@@ -12,12 +12,16 @@ import java.util.UUID;
 
 @Slf4j
 @Component
-public class SkiEventProducer {
+public class SkiEventsProducer {
     @Value("${spring.kafka.topic}")
     private String topic;
 
-    @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
+
+    @Autowired
+    public SkiEventsProducer(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     public String sendSkiResortsEvent() {
         UUID uuid = UUID.randomUUID();
