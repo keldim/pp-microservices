@@ -2,6 +2,7 @@ package com.chrisyoo.notification;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 
 @Entity
@@ -23,6 +24,7 @@ public class Notification {
     )
     private Integer notificationId;
     private String uuid;
+    @Type(JsonType.class)
     private String skiApiData;
 //    private String message;
 //    private LocalDateTime sentAt;

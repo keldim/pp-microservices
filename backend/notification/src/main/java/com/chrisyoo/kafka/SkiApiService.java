@@ -19,6 +19,7 @@ public class SkiApiService {
         try {
             HttpResponse<String> response = HttpClient.newHttpClient().send(buildRequest(), HttpResponse.BodyHandlers.ofString());
             body = response.body();
+            System.out.println(response.body());
         } catch(Exception exception) {
             System.out.println(exception);
         }
