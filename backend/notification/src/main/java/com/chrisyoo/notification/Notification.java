@@ -2,7 +2,7 @@ package com.chrisyoo.notification;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Type;
+import org.hibernate.Length;
 
 
 @Entity
@@ -24,7 +24,7 @@ public class Notification {
     )
     private Integer notificationId;
     private String uuid;
-    @Type(JsonType.class)
+    @Column(name = "ski_api_data", length = Length.LOB_DEFAULT)
     private String skiApiData;
 //    private String message;
 //    private LocalDateTime sentAt;
