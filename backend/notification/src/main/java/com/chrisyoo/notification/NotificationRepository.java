@@ -6,5 +6,4 @@ import java.util.Optional;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
     Optional<Notification> findByUuid(String uuid);
-//    SearchByUuid
 }
