@@ -21,6 +21,8 @@ spring:
         format_sql: true
     show-sql: true
   kafka:
+    listener:
+      observation-enabled: true
     consumer:
       bootstrap-servers: localhost:9092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
