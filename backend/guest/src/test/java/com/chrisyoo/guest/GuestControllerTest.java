@@ -12,7 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EmbeddedKafka(topics = "ski")
-@TestPropertySource(properties = {"spring.kafka.producer.bootstrap-servers=${spring.embedded.kafka.brokers}"})
+@TestPropertySource(properties = {
+        "spring.kafka.producer.bootstrap-servers=${spring.embedded.kafka.brokers}",
+        "spring.datasource.url=jdbc:h2:mem:tesdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
+        "spring.datasource.driverClassName=org.h2.Driver",
+        "spring.datasource.username=sa",
+        "spring.datasource.password=",
+        "spring.datasource.testWhileIdle = true",
+        "spring.datasource.validationQuery = SELECT 1",
+        "spring.jpa.show-sql = true",
+        "spring.h2.console.enabled=true"
+})
 class GuestControllerTest {
     TestRestTemplate testRestTemplate;
 
