@@ -1,45 +1,36 @@
 package com.chrisyoo.guest;
 
+import com.chrisyoo.kafka.SkiEventsProducer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
-import org.springframework.kafka.test.context.EmbeddedKafka;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@EmbeddedKafka(topics = "ski")
-@TestPropertySource(properties = {
-        "spring.kafka.producer.bootstrap-servers=${spring.embedded.kafka.brokers}",
-        "spring.datasource.url=jdbc:h2:mem:tesdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
-        "spring.datasource.driverClassName=org.h2.Driver",
-        "spring.datasource.username=sa",
-        "spring.datasource.password=",
-        "spring.datasource.testWhileIdle = true",
-        "spring.datasource.validationQuery = SELECT 1",
-        "spring.jpa.show-sql = true",
-        "spring.h2.console.enabled=true"
-})
+@WebMvcTest(GuestController.class)
 class GuestControllerTest {
-    TestRestTemplate testRestTemplate;
+
+    MockMvc mockMvc;
+    @MockBean
+    SkiEventsProducer skiEventsProducer;
+    @MockBean
+    GuestService guestService;
 
     @Autowired
-    public GuestControllerTest(TestRestTemplate testRestTemplate) {
-        this.testRestTemplate = testRestTemplate;
+    public GuestControllerTest(MockMvc mockMvc) {
+        this.mockMvc = mockMvc;
     }
 
     @Test
-    void getSkiResorts() {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("content-type", MediaType.APPLICATION_JSON.toString());
-        var httpEntity = new HttpEntity<>(new String(), httpHeaders);
+    void getSkiResorts() throws Exception {
+        when(skiEventsProducer.sendSkiResortsEvent()).thenReturn(null);
 
-        var response = testRestTemplate
-                .exchange("api/v1/guests", HttpMethod.GET, httpEntity, String.class);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/api/v1/guests"))
+                .andExpect(status().isOk());
     }
 }
