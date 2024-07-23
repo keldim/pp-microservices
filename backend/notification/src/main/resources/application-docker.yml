@@ -1,0 +1,41 @@
+#logging:
+#  level:
+#    root: DEBUG
+
+server:
+  port: 9090
+
+spring:
+  application:
+    name: notification
+  datasource:
+    password: password
+    url: jdbc:postgresql://postgres:5432/notification
+    username: cyoo
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  kafka:
+    listener:
+      observation-enabled: true
+    consumer:
+      bootstrap-servers: kafka:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: ski-one
+  zipkin:
+    base-url: http://zipkin:9411
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

@@ -1,0 +1,42 @@
+#logging:
+#  level:
+#    root: DEBUG
+
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: guest
+  datasource:
+    password: password
+    url: jdbc:postgresql://postgres:5432/guest
+    username: cyoo
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  kafka:
+    topic: "ski"
+    listener:
+      observation-enabled: true
+    producer:
+      bootstrap-servers: kafka:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  zipkin:
+    base-url: http://zipkin:9411
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

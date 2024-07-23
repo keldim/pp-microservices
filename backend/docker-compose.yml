@@ -34,6 +34,8 @@ services:
     container_name: zipkin
     ports:
       - "9411:9411"
+    networks:
+      - zipkin
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -51,6 +53,7 @@ services:
       - 29092:29092
     networks:
       - zookeeper
+      - zipkin
     depends_on:
       - zookeeper
     environment:
@@ -61,10 +64,44 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  guest:
+    image: keldim/guest:latest
+    container_name: guest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - zookeeper
+      - postgres
+      - zipkin
+    depends_on:
+      - zipkin
+      - postgres
+      - kafka
+
+  notification:
+    image: keldim/notification:latest
+    container_name: notification
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - zookeeper
+      - postgres
+      - zipkin
+    depends_on:
+      - zipkin
+      - postgres
+      - kafka
+
 networks:
   postgres:
     driver: bridge
   zookeeper:
+    driver: bridge
+  zipkin:
     driver: bridge
 
 volumes:
