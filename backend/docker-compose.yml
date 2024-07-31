@@ -73,6 +73,7 @@ services:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin:9411/api/v2/spans
     networks:
       - zookeeper
       - postgres
@@ -89,6 +90,7 @@ services:
       - "9090:9090"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin:9411/api/v2/spans
     networks:
       - zookeeper
       - postgres
